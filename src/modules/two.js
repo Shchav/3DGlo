@@ -1,6 +1,6 @@
 
-const showName = () => {
+const two = () => {
     console.log('Module TWO');
 }
 
-module.exports = showName;
+module.exports = two;

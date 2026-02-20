@@ -1,6 +1,6 @@
 
-const one = require('./modules/one.js');
-const two = require('./modules/two.js');
+const timer = require('./modules/timer');
+// const two = require('./modules/two.js');
 
-one();
-two();
+timer('24 february 2026');
+// two();
