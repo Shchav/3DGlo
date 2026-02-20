@@ -27,11 +27,8 @@ const timer = (deadline) => {
         if (getTime.timeRemaining > 0) {
             setTimeout(updateClock, 1000);
         }
-
-
     }
     updateClock();
-    // getTimeRemaining('24 february 2026');
 }
 
 module.exports = timer;
