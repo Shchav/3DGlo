@@ -23,7 +23,7 @@ const validators = () => {
     )
     allEmail.forEach((email) => {
         email.addEventListener('input', (e) => {
-            e.target.value = e.target.value.replace(/[^a-zA-Z0-9@-_.!~*\']/, '');
+            e.target.value = e.target.value.replace(/[^a-zA-Z0-9@-_\.!~*\']/, '');
         })
     });
 
