@@ -21,11 +21,12 @@ const timer = (deadline) => {
         return { timeRemaining, hours, minutes, seconds }
     }
 
-    const addZero = (str) => {
-        if (String(str).length < 2) {
-            str = '0' + str;
+    const addZero = (num) => {
+        let strNum = String(num);
+        if (strNum.length < 2) {
+            strNum = `0${strNum}`;
         }
-        return str;
+        return strNum;
     }
 
     const updateClock = () => {

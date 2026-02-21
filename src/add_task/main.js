@@ -59,7 +59,7 @@ const getInfo = (dateNow) => {
 }
 
 const info = getInfo(new Date);
-document.body.innerHTML = info.greetings + '<br>';
-document.body.innerHTML += 'Сегодня: ' + info.dayOfWeek + '<br>';
-document.body.innerHTML += 'Текущее время: ' + info.time + '<br>';
-document.body.innerHTML += 'До нового года осталось ' + info.untilNewYear;
+document.body.innerHTML = `${info.greetings}<br>`;
+document.body.innerHTML += `Сегодня: ${info.dayOfWeek}<br>`;
+document.body.innerHTML += `Текущее время: ${info.time}<br>`;
+document.body.innerHTML += `До нового года осталось ${info.untilNewYear}`;
