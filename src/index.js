@@ -11,4 +11,14 @@ menu();
 modal();
 validators();
 tabs();
-slider();
+slider({
+    content: '.portfolio-content',
+    contentItem: {
+        item: '.portfolio-item',
+        itemActive: '.portfolio-item-active'
+    },
+    pagination: {
+        dots: '.portfolio-dots',
+        dotActive: '.dot-active'
+    }
+});

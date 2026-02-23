@@ -1,21 +1,30 @@
 
-const slider = () => {
+const slider = (settings) => {
 
-    const slides = document.querySelectorAll('.portfolio-item');
+    // Валидация переданных настроек
+    const sliderBlock = document.querySelector(settings.content);
+    if (!sliderBlock) return;
+    const slides = sliderBlock.querySelectorAll(settings.contentItem.item);
+    if (!slides.length) return;
+    if (!sliderBlock.querySelector(settings.pagination.dots)) return;
+    if (!('dotActive' in settings.pagination))
+        settings.pagination.dotActive = '.dot-active'; // Значение по умолчанию
+    if (!('itemActive' in settings.contentItem))
+        settings.contentItem.itemActive = '.portfolio-item-active'; // Значение по умолчанию
 
+    // Добавление точек пагинатора
     const addDots = () => {
-        const dotsUl = document.querySelector('.portfolio-dots');
+        const dotsUl = document.querySelector(settings.pagination.dots);
         slides.forEach((slider, index) => {
             const li = document.createElement('li');
             li.classList.add('dot');
             if (index == 0)
-                li.classList.add('dot-active');
+                li.classList.add(settings.pagination.dotActive.slice(1));
             dotsUl.append(li);
         })
     }
     addDots();
 
-    const sliderBlock = document.querySelector('.portfolio-content');
     const dots = document.querySelectorAll('.dot');
 
     const timeInterval = 2000;
@@ -23,21 +32,21 @@ const slider = () => {
     let interval;
 
     const prevSlide = (elems, index, strClass) => {
-        elems[index].classList.remove(strClass);
+        elems[index].classList.remove(strClass.slice(1));
     }
     const nextSlide = (elems, index, strClass) => {
-        elems[index].classList.add(strClass);
+        elems[index].classList.add(strClass.slice(1));
     }
 
     const autoSlide = () => {
-        prevSlide(slides, currentSlide, 'portfolio-item-active');
-        prevSlide(dots, currentSlide, 'dot-active');
+        prevSlide(slides, currentSlide, settings.contentItem.itemActive);
+        prevSlide(dots, currentSlide, settings.pagination.dotActive);
         currentSlide++;
         if (currentSlide >= slides.length) {
             currentSlide = 0;
         }
-        nextSlide(slides, currentSlide, 'portfolio-item-active');
-        nextSlide(dots, currentSlide, 'dot-active');
+        nextSlide(slides, currentSlide, settings.contentItem.itemActive);
+        nextSlide(dots, currentSlide, settings.pagination.dotActive);
     }
     const startSlide = (timer = 1500) => {
         interval = setInterval(autoSlide, timer);
@@ -53,8 +62,8 @@ const slider = () => {
             return;
         }
 
-        prevSlide(slides, currentSlide, 'portfolio-item-active');
-        prevSlide(dots, currentSlide, 'dot-active');
+        prevSlide(slides, currentSlide, settings.contentItem.itemActive);
+        prevSlide(dots, currentSlide, settings.pagination.dotActive);
 
         if (e.target.matches('#arrow-right')) {
             currentSlide++;
@@ -75,8 +84,8 @@ const slider = () => {
             currentSlide = slides.length - 1;
         }
 
-        nextSlide(slides, currentSlide, 'portfolio-item-active');
-        nextSlide(dots, currentSlide, 'dot-active');
+        nextSlide(slides, currentSlide, settings.contentItem.itemActive);
+        nextSlide(dots, currentSlide, settings.pagination.dotActive);
     });
 
     sliderBlock.addEventListener('mouseenter', (e) => {
