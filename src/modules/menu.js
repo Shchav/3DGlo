@@ -11,7 +11,8 @@ const menu = () => {
     }
 
     document.body.addEventListener('click', (e) => {
-        if (!e.target.closest('menu')) {
+        if (!e.target.closest('menu') &&
+            menu.classList.contains('active-menu')) {
             toggleMenu();
         }
     })

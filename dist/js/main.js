@@ -15,7 +15,7 @@
   \**********************/
 (__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
-eval("{\nconst timer = __webpack_require__(/*! ./modules/timer */ \"./src/modules/timer.js\");\nconst menu = __webpack_require__(/*! ./modules/menu.js */ \"./src/modules/menu.js\");\nconst modal = __webpack_require__(/*! ./modules/modal.js */ \"./src/modules/modal.js\");\nconst validators = __webpack_require__(/*! ./modules/validators.js */ \"./src/modules/validators.js\");\nconst tabs = __webpack_require__(/*! ./modules/tabs.js */ \"./src/modules/tabs.js\");\n\ntimer('23 february 2026 12:40:00');\nmenu();\nmodal();\ntabs();\n\n//# sourceURL=webpack://3dglo/./src/index.js?\n}");
+eval("{\nconst timer = __webpack_require__(/*! ./modules/timer */ \"./src/modules/timer.js\");\nconst menu = __webpack_require__(/*! ./modules/menu.js */ \"./src/modules/menu.js\");\nconst modal = __webpack_require__(/*! ./modules/modal.js */ \"./src/modules/modal.js\");\nconst validators = __webpack_require__(/*! ./modules/validators.js */ \"./src/modules/validators.js\");\nconst tabs = __webpack_require__(/*! ./modules/tabs.js */ \"./src/modules/tabs.js\");\n\ntimer('27 february 2026 12:40:00');\nmenu();\nmodal();\nvalidators();\ntabs();\n\n//# sourceURL=webpack://3dglo/./src/index.js?\n}");
 
 /***/ },
 
@@ -25,7 +25,7 @@ eval("{\nconst timer = __webpack_require__(/*! ./modules/timer */ \"./src/module
   \*****************************/
 (module) {
 
-eval("{\nconst menu = () => {\n\n    const menuBtn = document.querySelector('.menu');\n    const menu = document.querySelector('menu');\n    // const closeBtn = menu.querySelector('.close-btn');\n    // const menuItems = menu.querySelectorAll('ul>li>a');\n\n    const toggleMenu = () => {\n        menu.classList.toggle('active-menu');\n    }\n\n    document.body.addEventListener('click', (e) => {\n        if (!e.target.closest('menu')) {\n            toggleMenu();\n        }\n    })\n\n    menuBtn.addEventListener('click', (e) => {\n        e.stopPropagation();\n        toggleMenu();\n    });\n\n    menu.addEventListener('click', (e) => {\n        if (e.target == menu) {\n            return;\n        }\n        toggleMenu();\n    });\n}\n\nmodule.exports = menu;\n\n//# sourceURL=webpack://3dglo/./src/modules/menu.js?\n}");
+eval("{\nconst menu = () => {\n\n    const menuBtn = document.querySelector('.menu');\n    const menu = document.querySelector('menu');\n    // const closeBtn = menu.querySelector('.close-btn');\n    // const menuItems = menu.querySelectorAll('ul>li>a');\n\n    const toggleMenu = () => {\n        menu.classList.toggle('active-menu');\n    }\n\n    document.body.addEventListener('click', (e) => {\n        if (!e.target.closest('menu') &&\n            menu.classList.contains('active-menu')) {\n            toggleMenu();\n        }\n    })\n\n    menuBtn.addEventListener('click', (e) => {\n        e.stopPropagation();\n        toggleMenu();\n    });\n\n    menu.addEventListener('click', (e) => {\n        if (e.target == menu) {\n            return;\n        }\n        toggleMenu();\n    });\n}\n\nmodule.exports = menu;\n\n//# sourceURL=webpack://3dglo/./src/modules/menu.js?\n}");
 
 /***/ },
 
