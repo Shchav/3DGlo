@@ -15,7 +15,7 @@
   \**********************/
 (__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
-eval("{\nconst timer = __webpack_require__(/*! ./modules/timer */ \"./src/modules/timer.js\");\nconst menu = __webpack_require__(/*! ./modules/menu.js */ \"./src/modules/menu.js\");\nconst modal = __webpack_require__(/*! ./modules/modal.js */ \"./src/modules/modal.js\");\nconst validators = __webpack_require__(/*! ./modules/validators.js */ \"./src/modules/validators.js\");\n\ntimer('23 february 2026 12:40:00');\nmenu();\nmodal();\nvalidators();\n\n//# sourceURL=webpack://3dglo/./src/index.js?\n}");
+eval("{\nconst timer = __webpack_require__(/*! ./modules/timer */ \"./src/modules/timer.js\");\nconst menu = __webpack_require__(/*! ./modules/menu.js */ \"./src/modules/menu.js\");\nconst modal = __webpack_require__(/*! ./modules/modal.js */ \"./src/modules/modal.js\");\nconst validators = __webpack_require__(/*! ./modules/validators.js */ \"./src/modules/validators.js\");\nconst tabs = __webpack_require__(/*! ./modules/tabs.js */ \"./src/modules/tabs.js\");\n\ntimer('23 february 2026 12:40:00');\nmenu();\nmodal();\ntabs();\n\n//# sourceURL=webpack://3dglo/./src/index.js?\n}");
 
 /***/ },
 
@@ -25,7 +25,7 @@ eval("{\nconst timer = __webpack_require__(/*! ./modules/timer */ \"./src/module
   \*****************************/
 (module) {
 
-eval("{\nconst menu = () => {\n\n    const menuBtn = document.querySelector('.menu');\n    const menu = document.querySelector('menu');\n    const closeBtn = menu.querySelector('.close-btn');\n    const menuItems = menu.querySelectorAll('ul>li>a');\n\n    const handleMenu = () => {\n        menu.classList.toggle('active-menu');\n    }\n\n    menuBtn.addEventListener('click', handleMenu);\n\n    closeBtn.addEventListener('click', handleMenu);\n\n    menuItems.forEach(menuItem => menuItem.addEventListener('click', handleMenu));\n}\n\nmodule.exports = menu;\n\n//# sourceURL=webpack://3dglo/./src/modules/menu.js?\n}");
+eval("{\nconst menu = () => {\n\n    const menuBtn = document.querySelector('.menu');\n    const menu = document.querySelector('menu');\n    // const closeBtn = menu.querySelector('.close-btn');\n    // const menuItems = menu.querySelectorAll('ul>li>a');\n\n    const toggleMenu = () => {\n        menu.classList.toggle('active-menu');\n    }\n\n    document.body.addEventListener('click', (e) => {\n        if (!e.target.closest('menu')) {\n            toggleMenu();\n        }\n    })\n\n    menuBtn.addEventListener('click', (e) => {\n        e.stopPropagation();\n        toggleMenu();\n    });\n\n    menu.addEventListener('click', (e) => {\n        if (e.target == menu) {\n            return;\n        }\n        toggleMenu();\n    });\n}\n\nmodule.exports = menu;\n\n//# sourceURL=webpack://3dglo/./src/modules/menu.js?\n}");
 
 /***/ },
 
@@ -35,7 +35,17 @@ eval("{\nconst menu = () => {\n\n    const menuBtn = document.querySelector('.me
   \******************************/
 (module) {
 
-eval("{const modal = () => {\r\n\r\n    const modal = document.querySelector('.popup');\r\n    const modalContent = document.querySelector('.popup-content');\r\n    const closeBtn = modal.querySelector('.popup-close');\r\n    const buttons = document.querySelectorAll('.popup-btn');\r\n\r\n    const animation = () => {\r\n        modal.style.visibility = 'hidden';\r\n\r\n        let beginTop = -parseInt(modalContent.clientHeight);\r\n        let top = parseInt(modalContent.offsetTop);\r\n        modal.style.visibility = '';\r\n\r\n        let id = setInterval(() => {\r\n            modalContent.style.top = `${beginTop++}px`;\r\n            if (beginTop >= top)\r\n                clearInterval(id);\r\n        }, 1);\r\n    }\r\n\r\n    buttons.forEach(button => {\r\n        button.addEventListener('click', () => {\r\n            modal.style.display = 'block';\r\n            if (parseInt(screen.width) > 768)\r\n                animation();\r\n        })\r\n    });\r\n\r\n    closeBtn.addEventListener('click',\r\n        () => { modal.style.display = 'none'; });\r\n}\r\n\r\nmodule.exports = modal;\n\n//# sourceURL=webpack://3dglo/./src/modules/modal.js?\n}");
+eval("{const modal = () => {\r\n\r\n    const modal = document.querySelector('.popup');\r\n    const modalContent = document.querySelector('.popup-content');\r\n    const buttons = document.querySelectorAll('.popup-btn');\r\n\r\n    const animation = () => {\r\n        modal.style.visibility = 'hidden';\r\n\r\n        let beginTop = -parseInt(modalContent.clientHeight);\r\n        let top = parseInt(modalContent.offsetTop);\r\n        modal.style.visibility = '';\r\n\r\n        let id = setInterval(() => {\r\n            modalContent.style.top = `${beginTop++}px`;\r\n            if (beginTop >= top)\r\n                clearInterval(id);\r\n        }, 1);\r\n    }\r\n\r\n    buttons.forEach(button => {\r\n        button.addEventListener('click', () => {\r\n            modal.style.display = 'block';\r\n            if (parseInt(screen.width) > 768)\r\n                animation();\r\n        })\r\n    });\r\n\r\n    modal.addEventListener('click', (e) => {\r\n        if (!e.target.closest('.popup-content') ||\r\n            e.target.classList.contains('popup-close')) {\r\n            modal.style.display = 'none';\r\n        }\r\n    });\r\n}\r\n\r\nmodule.exports = modal;\n\n//# sourceURL=webpack://3dglo/./src/modules/modal.js?\n}");
+
+/***/ },
+
+/***/ "./src/modules/tabs.js"
+/*!*****************************!*\
+  !*** ./src/modules/tabs.js ***!
+  \*****************************/
+(module) {
+
+eval("{\r\nconst tabs = (deadline) => {\r\n    const tabPanel = document.querySelector('.service-header');\r\n    const tabs = document.querySelectorAll('.service-header-tab');\r\n    const tabContent = document.querySelectorAll('.service-tab');\r\n\r\n    tabPanel.addEventListener('click', (e) => {\r\n        if (e.target.closest('.service-header-tab')) {\r\n            const tabBtn = e.target.closest('.service-header-tab');\r\n            tabs.forEach((tab, index) => {\r\n                if (tab === tabBtn) {\r\n                    tab.classList.add('active');\r\n                    tabContent[index].classList.remove('d-none');\r\n                } else {\r\n                    tab.classList.remove('active');\r\n                    tabContent[index].classList.add('d-none');\r\n\r\n                }\r\n            })\r\n        }\r\n    });\r\n}\r\n\r\nmodule.exports = tabs;\n\n//# sourceURL=webpack://3dglo/./src/modules/tabs.js?\n}");
 
 /***/ },
 

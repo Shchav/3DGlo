@@ -3,18 +3,30 @@ const menu = () => {
 
     const menuBtn = document.querySelector('.menu');
     const menu = document.querySelector('menu');
-    const closeBtn = menu.querySelector('.close-btn');
-    const menuItems = menu.querySelectorAll('ul>li>a');
+    // const closeBtn = menu.querySelector('.close-btn');
+    // const menuItems = menu.querySelectorAll('ul>li>a');
 
-    const handleMenu = () => {
+    const toggleMenu = () => {
         menu.classList.toggle('active-menu');
     }
 
-    menuBtn.addEventListener('click', handleMenu);
+    document.body.addEventListener('click', (e) => {
+        if (!e.target.closest('menu')) {
+            toggleMenu();
+        }
+    })
 
-    closeBtn.addEventListener('click', handleMenu);
+    menuBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        toggleMenu();
+    });
 
-    menuItems.forEach(menuItem => menuItem.addEventListener('click', handleMenu));
+    menu.addEventListener('click', (e) => {
+        if (e.target == menu) {
+            return;
+        }
+        toggleMenu();
+    });
 }
 
 module.exports = menu;
