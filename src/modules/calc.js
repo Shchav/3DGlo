@@ -31,7 +31,22 @@ const calc = (price = 100) => {
             totalValue = 0;
         }
 
-        total.textContent = totalValue;
+        // total.textContent = totalValue;
+        setAnimationTotal(totalValue);
+    }
+
+    let idTimerInterval;
+    const setAnimationTotal = (nextTotal) => {
+        let currentTotal = +total.textContent;
+        clearInterval(idTimerInterval);
+        idTimerInterval = setInterval(() => {
+            if (currentTotal < nextTotal)
+                total.textContent = ++currentTotal;
+            else if (currentTotal > nextTotal)
+                total.textContent = --currentTotal;
+            else
+                clearInterval(idTimerInterval);
+        }, 10)
     }
 
     calcBlock.addEventListener('input', (e) => {
