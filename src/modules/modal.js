@@ -1,3 +1,5 @@
+import { animate } from './helpers.js'
+
 const modal = () => {
 
     const modal = document.querySelector('.popup');
@@ -6,16 +8,31 @@ const modal = () => {
 
     const animation = () => {
         modal.style.visibility = 'hidden';
-
         let beginTop = -parseInt(modalContent.clientHeight);
         let top = parseInt(modalContent.offsetTop);
         modal.style.visibility = '';
 
-        let id = setInterval(() => {
-            modalContent.style.top = `${beginTop++}px`;
-            if (beginTop >= top)
-                clearInterval(id);
-        }, 1);
+        function bounce(timeFraction) {
+            for (let a = 0, b = 1; 1; a += b, b /= 2) {
+                if (timeFraction >= (7 - 4 * a) / 11) {
+                    return -Math.pow((11 - 6 * a - 11 * timeFraction) / 4, 2) + Math.pow(b, 2)
+                }
+            }
+        }
+        function makeEaseOut(timing) {
+            return function (timeFraction) {
+                return 1 - timing(1 - timeFraction);
+            }
+        }
+
+        animate({
+            duration: 1000,
+            timing: makeEaseOut(bounce),
+            draw(progress) {
+                const valueFraction = beginTop + (top - beginTop) * progress;
+                modalContent.style.top = `${valueFraction}px`;
+            }
+        });
     }
 
     buttons.forEach(button => {
@@ -34,4 +51,4 @@ const modal = () => {
     });
 }
 
-module.exports = modal;
+export default modal;

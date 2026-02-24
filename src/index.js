@@ -1,11 +1,10 @@
-
-const timer = require('./modules/timer');
-const menu = require('./modules/menu.js');
-const modal = require('./modules/modal.js');
-const validators = require('./modules/validators.js');
-const tabs = require('./modules/tabs.js');
-const slider = require('./modules/slider.js');
-const calc = require('./modules/calc.js');
+import timer from './modules/timer.js';
+import menu from './modules/menu.js';
+import modal from './modules/modal.js';
+import validators from './modules/validators.js';
+import tabs from './modules/tabs.js';
+import slider from './modules/slider.js';
+import calc from './modules/calc.js';
 
 timer('27 february 2026 12:40:00');
 menu();

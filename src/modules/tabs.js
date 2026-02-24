@@ -21,4 +21,4 @@ const tabs = (deadline) => {
     });
 }
 
-module.exports = tabs;
+export default tabs;

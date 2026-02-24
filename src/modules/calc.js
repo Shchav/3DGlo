@@ -1,3 +1,4 @@
+import { animate } from "./helpers.js";
 
 const calc = (price = 100) => {
 
@@ -31,22 +32,22 @@ const calc = (price = 100) => {
             totalValue = 0;
         }
 
-        // total.textContent = totalValue;
         setAnimationTotal(totalValue);
     }
 
-    let idTimerInterval;
     const setAnimationTotal = (nextTotal) => {
         let currentTotal = +total.textContent;
-        clearInterval(idTimerInterval);
-        idTimerInterval = setInterval(() => {
-            if (currentTotal < nextTotal)
-                total.textContent = ++currentTotal;
-            else if (currentTotal > nextTotal)
-                total.textContent = --currentTotal;
-            else
-                clearInterval(idTimerInterval);
-        }, 10)
+
+        animate({
+            duration: 2000,
+            timing(timeFraction) {
+                // Использование easeOut без обертки (так более эргономичнее выглядит)
+                return 1 - Math.pow(1 - timeFraction, 10);
+            },
+            draw(progress) {
+                total.textContent = Math.floor(currentTotal + (nextTotal - currentTotal) * progress);
+            }
+        });
     }
 
     calcBlock.addEventListener('input', (e) => {
@@ -54,10 +55,7 @@ const calc = (price = 100) => {
             e.target === calcCount || e.target === calcDay) {
             countCalc();
         }
-
     })
-
-
 }
 
-module.exports = calc;
+export default calc;

@@ -102,4 +102,4 @@ const slider = (settings) => {
     startSlide(timeInterval);
 }
 
-module.exports = slider;
+export default slider;
