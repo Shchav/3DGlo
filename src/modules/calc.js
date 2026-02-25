@@ -41,7 +41,7 @@ const calc = (price = 100) => {
         animate({
             duration: 2000,
             timing(timeFraction) {
-                // Использование easeOut без обертки (так более эргономичнее выглядит)
+                // easeOut (без обертки)
                 return 1 - Math.pow(1 - timeFraction, 10);
             },
             draw(progress) {
