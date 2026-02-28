@@ -56,16 +56,16 @@ const sendForm = ({ formId, someElem = [] }) => {
         })
 
         if (validate(formElements)) { // Валидация input-ов формы
-            // sendData(formBody)
-            //     .then(data => {
-            //         statusBlock.textContent = successText;
-            //         formElements.forEach(input => {
-            //             input.value = ''; // Очистка input-ов формы после отправки
-            //         })
-            //     })
-            //     .catch(error => {
-            //         statusBlock.textContent = errorText;
-            //     })
+            sendData(formBody)
+                .then(data => {
+                    statusBlock.textContent = successText;
+                    formElements.forEach(input => {
+                        input.value = ''; // Очистка input-ов формы после отправки
+                    })
+                })
+                .catch(error => {
+                    statusBlock.textContent = errorText;
+                })
         } else {
             alert('Данные не валидны!!!');
         }
