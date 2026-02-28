@@ -5,8 +5,9 @@ import validators from './modules/validators.js';
 import tabs from './modules/tabs.js';
 import slider from './modules/slider.js';
 import calc from './modules/calc.js';
+import sendForm from './modules/sendForm.js';
 
-timer('27 february 2026 12:40:00');
+timer('28 february 2026 12:40:00');
 menu();
 modal();
 validators();
@@ -23,3 +24,18 @@ slider({
     }
 });
 calc();
+sendForm({
+    formId: 'form1',
+    someElem: [
+        {
+            type: 'block',
+            id: 'total'
+        }
+    ]
+});
+sendForm({
+    formId: 'form3'
+});
+sendForm({
+    formId: 'form2'
+});

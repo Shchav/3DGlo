@@ -8,15 +8,14 @@ const validators = () => {
         })
     });
 
-    const allInputText = document.querySelectorAll(
-        'input[type=text]:not(.calc-count):not(.calc-day):not(.calc-square), \
-        [placeholder="Ваше сообщение"]'
-    )
-    allInputText.forEach((inputText) => {
-        inputText.addEventListener('input', (e) => {
-            e.target.value = e.target.value.replace(/[^-a-zA-Z ]/, '');
-        })
-    });
+    // const allInputText = document.querySelectorAll(
+    //     'input[type=text]:not(.calc-count):not(.calc-day):not(.calc-square):not(.mess)'
+    // )
+    // allInputText.forEach((inputText) => {
+    //     inputText.addEventListener('input', (e) => {
+    //         e.target.value = e.target.value.replace(/[^-a-zA-Z ]/, '');
+    //     })
+    // });
 
     const allEmail = document.querySelectorAll(
         'input[type=email]'
@@ -32,7 +31,7 @@ const validators = () => {
     )
     allTel.forEach((tel) => {
         tel.addEventListener('input', (e) => {
-            e.target.value = e.target.value.replace(/[^0-9()-]/, '');
+            e.target.value = e.target.value.replace(/[^0-9()+-]/, '');
         })
     });
 }
