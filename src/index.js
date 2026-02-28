@@ -7,7 +7,7 @@ import slider from './modules/slider.js';
 import calc from './modules/calc.js';
 import sendForm from './modules/sendForm.js';
 
-timer('28 february 2026 12:40:00');
+timer('29 february 2026 12:40:00');
 menu();
 modal();
 validators();

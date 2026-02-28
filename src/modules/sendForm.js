@@ -36,7 +36,7 @@ const sendForm = ({ formId, someElem = [] }) => {
         const formData = new FormData(form);
         const formBody = {}
 
-        statusBlock.textContent = loadText;
+        // statusBlock.textContent = loadText;
         form.append(statusBlock);
 
         formData.forEach((val, key) => {
@@ -47,7 +47,6 @@ const sendForm = ({ formId, someElem = [] }) => {
         // отправки вместе с данными со всех input-ов формы
         someElem.forEach(elem => {
             const element = document.getElementById(elem.id);
-            // console.log(elem);
             if (elem.type === 'block') {
                 formBody[elem.id] = element.textContent;
             } else if (elem.type === 'input') {
@@ -56,8 +55,22 @@ const sendForm = ({ formId, someElem = [] }) => {
         })
 
         if (validate(formElements)) { // Валидация input-ов формы
+            let i = 0;
+            const id = setInterval(() => {
+                if (i++ == 0)
+                    statusBlock.textContent = '|';
+                else if (i == 1)
+                    statusBlock.textContent = '/';
+                else if (i == 2)
+                    statusBlock.textContent = '\u2014';
+                else if (i == 3) {
+                    statusBlock.textContent = '\\';
+                    i = 0;
+                }
+            }, 100);
             sendData(formBody)
                 .then(data => {
+                    clearInterval(id);
                     statusBlock.textContent = successText;
                     formElements.forEach(input => {
                         input.value = ''; // Очистка input-ов формы после отправки
